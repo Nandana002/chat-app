@@ -1,5 +1,3 @@
-
-
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
@@ -16,10 +14,8 @@ const io = new Server(server, {
   },
 });
 
-// apply authentication middleware to all socket connections
 io.use(socketAuthMiddleware);
 
-// we will use this function to check if the user is online or not
 export function getReceiverSocketId(userId) {
   return userSocketMap[userId];
 }
@@ -38,10 +34,11 @@ io.on("connection", (socket) => {
 
   // with socket.on we listen for events from clients
   socket.on("disconnect", () => {
-    console.log("A user disconnected", socket.user.fullName);
+    console.log("A user disconnected", socket.userId.fullName);
     delete userSocketMap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
 
 export { io, app, server };
+
