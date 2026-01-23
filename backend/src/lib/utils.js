@@ -16,7 +16,7 @@ export const generateToken = (userId, res) => {
     httpOnly: true, // prevent XSS attacks: cross-site scripting
     sameSite: ENV.NODE_ENV === "development" ? "strict" : "none",
     secure: ENV.NODE_ENV === "development" ? false : true,
-      domain: ENV.NODE_ENV === "production" ? ".onrender.com" : undefined, // Adjust domain as needed
+    domain: ENV.NODE_ENV === "production" ? "chat-app-1-g1rv.onrender.com" : undefined,
   });
 
   return token;
