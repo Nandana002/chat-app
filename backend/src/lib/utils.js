@@ -10,14 +10,12 @@ export const generateToken = (userId, res) => {
   const token = jwt.sign({ userId }, JWT_SECRET, {
     expiresIn: "7d",
   });
-
-  res.cookie("jwt", token, {
-    maxAge: 7 * 24 * 60 * 60 * 1000, // MS
-    httpOnly: true, // prevent XSS attacks: cross-site scripting
-    sameSite: ENV.NODE_ENV === "development" ? "strict" : "none",
-    secure: ENV.NODE_ENV === "development" ? false : true,
-    domain: ENV.NODE_ENV === "production" ? "chat-app-1-g1rv.onrender.com" : undefined,
-  });
+res.cookie("jwt", token, {
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  httpOnly: true,
+  sameSite: ENV.NODE_ENV === "development" ? "strict" : "none", // Changed this line
+  secure: ENV.NODE_ENV === "development" ? false : true,
+});
 
   return token;
 };
