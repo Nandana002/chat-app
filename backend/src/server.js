@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 // make ready for deployment
-if (ENV.NODE_ENV === "production") {
+if (ENV.NODE_ENV === "development") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
   app.get("*", (_, res) => {
